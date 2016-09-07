@@ -31,14 +31,14 @@ function redirect(location) {
 function init() {
 
 	if (document.URL.indexOf('screen=place') === -1) {
-		UI.ErrorMessage("This script must be run from the Rally Point. Redirecting . . .", 1500);
+		UI.ErrorMessage("This script must be run from the Rally Point. Redirecting . . .", 3000);
 		setTimeout(function(){
 			redirect("place");
 		   }, 2000);
 	} else {
 
 			if (village_list === ""){
-				UI.ErrorMessage("Your village list is empty. Please use at least one village in the format of xxx|yyy.", 2500);
+				UI.ErrorMessage("Your village list is empty. Please use at least one village in the format of xxx|yyy.", 4000);
 			}
 			else{
 			var index = getStorage(); ;
@@ -47,7 +47,7 @@ function init() {
 				index = 0;
 				setStorage(index);
 			} else if (index === -1) {
-				UI.ErrorMessage("Local Storage is not enabled, or can not be written to.", 2500);
+				UI.ErrorMessage("Local Storage is not enabled, or can not be written to.", 4000);
 			}
 
 			a = village_list.match(/(\d+\|\d+)/g);
@@ -75,7 +75,7 @@ function init() {
 
 			if (index == len) {
 				setStorage(0);
-				UI.SuccessMessage("You have reached the end of the list. The village index has been reset back to the first village.", 2000)
+				UI.SuccessMessage("You have reached the end of the list. The village index has been reset back to the first village.", 4000)
 			} else {
 				index++;
 				setStorage(index);
