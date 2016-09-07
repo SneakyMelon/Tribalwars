@@ -1,18 +1,4 @@
 
-var village_list = "YOUR_VILLAGE_LIST_HERE";
-
-var units = {
-	ram : 0,
-	catapult : 0,
-	sword : 0,
-	spear : 0,
-	axe : 0,
-	archer : 0,
-	spy : 4,
-	light : 10,
-	marcher : 0,
-	heavy : 0,
-}
 var d = document;
 
 if (window.frames.length > 0) {
@@ -39,7 +25,7 @@ function setStorage(value) {
 }
 
 function redirect(location) {
-	window.location = game_data.link_base_pure + location;	
+	window.location = game_data.link_base_pure + location;
 }
 
 function init() {
@@ -50,44 +36,50 @@ function init() {
 			redirect("place");
 		   }, 2000);
 	} else {
-		var index = getStorage(); ;
 
-		if (index === null) {
-			index = 0;
-			setStorage(index);
-		} else if (index === -1) {
-			UI.ErrorMessage("Local Storage is not enabled, or can not be written to.", 2500);
-		}
+			if (village_list === ""){
+				UI.ErrorMessage("Your village list is empty. Please use at least one village in the format of xxx|yyy.", 2500);
+			}
+			else{
+			var index = getStorage(); ;
 
-		a = village_list.match(/(\d+\|\d+)/g);
+			if (index === null) {
+				index = 0;
+				setStorage(index);
+			} else if (index === -1) {
+				UI.ErrorMessage("Local Storage is not enabled, or can not be written to.", 2500);
+			}
 
-		b = a[index].split("|");
+			a = village_list.match(/(\d+\|\d+)/g);
 
-		rallyPointForm.x.value = b[0];
-		rallyPointForm.y.value = b[1];
+			b = a[index].split("|");
 
-		$('#place_target').find('input').val(b[0] + '|' + b[1])
+			rallyPointForm.x.value = b[0];
+			rallyPointForm.y.value = b[1];
 
-		for (var unit in units) {
-			if (units.hasOwnProperty(unit)) {
-				if ((units[unit] > 0) && (typeof(rallyPointForm[unit]) != "undefined")) {
-					count = parseInt(rallyPointForm[unit].nextSibling.nextSibling.innerHTML.match(/\d+/));
+			$('#place_target').find('input').val(b[0] + '|' + b[1])
 
-					if (count > 0) {
-						rallyPointForm[unit].value = Math.min(units[unit], count);
+			for (var unit in units) {
+				if (units.hasOwnProperty(unit)) {
+					if ((units[unit] > 0) && (typeof(rallyPointForm[unit]) != "undefined")) {
+						count = parseInt(rallyPointForm[unit].nextSibling.nextSibling.innerHTML.match(/\d+/));
+
+						if (count > 0) {
+							rallyPointForm[unit].value = Math.min(units[unit], count);
+						}
 					}
 				}
 			}
-		}
 
-		var len = a.length - 1;
+			var len = a.length - 1;
 
-		if (index == len) {
-			setStorage(0);
-			UI.SuccessMessage("You have reached the end of the list. The village index has been reset back to the first village.", 2000)
-		} else {
-			index++;
-			setStorage(index);
+			if (index == len) {
+				setStorage(0);
+				UI.SuccessMessage("You have reached the end of the list. The village index has been reset back to the first village.", 2000)
+			} else {
+				index++;
+				setStorage(index);
+			}
 		}
 	}
 }
