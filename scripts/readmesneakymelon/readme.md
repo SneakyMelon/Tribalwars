@@ -4,7 +4,7 @@
 * Change the units to your farming wishes.
 * Save as a new bookmark
 
-[code]
+```javascript
 javascript:
 var village_list = "";
 var units = {
@@ -26,7 +26,7 @@ if (typeof window.$ === "function" && typeof window.$.getScript === "function") 
 } else {
   UI.ErrorMessage("Can not access getScript Method. Please submit a new <a href='https://gitub.com/SneakyMelon/Tribalwars/issues/new'>bug report</a>", 5000);
 }
-[/code]
+```
 
 ###Issues
 Any issues, please submit a bug report at https://github.com/sneakymelon/Tribalwars/issues/new
