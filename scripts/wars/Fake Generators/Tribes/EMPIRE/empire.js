@@ -61,11 +61,18 @@ function init() {
 		 * 
 	*/
 	
+	if (typeof village_list !== "string")
+	{
+		UI.ErrorMessage("Village_List variable is not defined. Please remember to add the village list.", 3000)
+	}
+	else
+	{
+		// Separate the list of coords into individual villages
+		var coord = village_list.split(" ");
+	
 	// Get the rally point form Form
 	var rallyPointForm = document.forms[0];
 
-	// Separate the list of coords into individual villages
-	var coord = coords.split(" ");
 
 	// Generate random coordinates
 	var randomVillage = Math.floor(Math.random() * coord.length);
@@ -120,6 +127,7 @@ function init() {
 				}
 			}
 		}
+	}
 	}
 }
 
